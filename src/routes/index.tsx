@@ -1,25 +1,29 @@
 import { component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
+import prisma from "~/libs/PrismaClient";
+
+export const useGetIssues = routeLoader$(async () => {
+  return await prisma.issue.findMany();
+});
 
 export default component$(() => {
+  const issues = useGetIssues();
   return (
     <>
-      <h1>Hi 👋</h1>
-      <p>
-        Can't wait to see what you build with qwik!
-        <br />
-        Happy coding.
-      </p>
+      <h1>Dashboard</h1>
+      {issues.value.map((issue) => (
+        <p key={issue.id}>{issue.title}</p>
+      ))}
     </>
   );
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to Qwik",
+  title: "Issue Tracker",
   meta: [
     {
       name: "description",
-      content: "Qwik site description",
+      content: "Made by Al-Nahian Pulok",
     },
   ],
 };

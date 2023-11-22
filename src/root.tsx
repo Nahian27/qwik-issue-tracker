@@ -6,7 +6,10 @@ import {
 } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+// import 'bootstrap/dist/js/bootstrap.bundle'
 import "./global.css";
+import Bootstrap from "./components/bootstrap";
 
 export default component$(() => {
   /**
@@ -23,9 +26,10 @@ export default component$(() => {
         <link rel="manifest" href="/manifest.json" />
         <RouterHead />
       </head>
-      <body lang="en">
+      <body lang="en" data-bs-theme="dark">
         <RouterOutlet />
         <ServiceWorkerRegister />
+        <Bootstrap />
       </body>
     </QwikCityProvider>
   );
