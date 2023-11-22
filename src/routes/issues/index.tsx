@@ -6,13 +6,15 @@ import {
   Form,
   routeAction$,
 } from "@builder.io/qwik-city";
-import prisma from "~/libs/PrismaClient";
+import { PrismaClient } from "@prisma/client";
 
 export const useGetIssues = routeLoader$(async () => {
+  const prisma = new PrismaClient();
   return await prisma.issue.findMany();
 });
 
 export const useDeleteIssue = routeAction$(async (data) => {
+  const prisma = new PrismaClient();
   return await prisma.issue.delete({ where: { id: Number(data.id) } });
 });
 

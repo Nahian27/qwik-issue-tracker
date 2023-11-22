@@ -5,9 +5,10 @@ import {
   Form,
   Link,
 } from "@builder.io/qwik-city";
-import prisma from "~/libs/PrismaClient";
+import { PrismaClient } from "@prisma/client";
 
 export const useCreateIssue = routeAction$(async (data) => {
+  const prisma = new PrismaClient();
   await prisma.issue.create({
     data: {
       title: data.title as string,

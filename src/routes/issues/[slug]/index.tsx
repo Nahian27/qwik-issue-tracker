@@ -1,8 +1,9 @@
 import { component$ } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
-import prisma from "~/libs/PrismaClient";
+import { PrismaClient } from "@prisma/client";
 
 export const useGetIssueDetails = routeLoader$(async ({ params }) => {
+  const prisma = new PrismaClient();
   return await prisma.issue.findUnique({
     where: { id: Number(params.slug) },
   });
